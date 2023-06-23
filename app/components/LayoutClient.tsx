@@ -19,7 +19,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
             {children}
             <Footer />
           </div>
-          <div className="h-16"></div>
+          <div className="h-16">ciccio</div>
           <BottomNavbar />
         </body>
       </CollectionProvider>
