@@ -12,8 +12,6 @@ export const metadata: Metadata = {
 
 export const CHAIN_ID = 338;
 
-import LayoutClient from "./components/LayoutClient";
-
 export default function RootLayout({
   children,
 }: {
@@ -21,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="forest" className={`${b.className}`}>
-      <LayoutClient>{children}</LayoutClient>
+      {children}
     </html>
   );
 }
