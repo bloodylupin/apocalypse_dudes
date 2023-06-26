@@ -8,7 +8,7 @@ import { useWeb3React } from "@web3-react/core";
 import { metaMask } from "../connectors/metaMask";
 import { walletConnect } from "../connectors/walletConnect";
 
-import { CHAIN_ID } from "../layout";
+import { CHAIN_ID } from "../contexts/CollectionContext";
 
 export default function ConnectButton() {
   const { isActive } = useWeb3React();

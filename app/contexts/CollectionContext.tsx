@@ -10,6 +10,8 @@ import {
   type SetStateAction,
 } from "react";
 
+export const CHAIN_ID = 338;
+
 import { useWeb3React } from "@web3-react/core";
 import { BigNumberish, Contract, ContractRunner, ethers } from "ethers";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../utils/solidityData";
