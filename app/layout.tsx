@@ -3,6 +3,13 @@ import { Bungee } from "next/font/google";
 
 const b = Bungee({ weight: "400", subsets: ["latin"] });
 
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Apocalypse Dudes',
+  description: 'Cronos NFT AI Collection by Jack Yolo',
+}
+
 export const CHAIN_ID = 338;
 
 import LayoutClient from "./components/LayoutClient";
