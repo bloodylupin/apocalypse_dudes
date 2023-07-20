@@ -24,7 +24,7 @@ export default function PageWrapper({ children }: { children: ReactNode }) {
             alt=""
             fill
             priority={true}
-            className="max-h-full object-cover object-center"
+            className="max-h-full object-cover object-top"
           />
         </div>
         <main className="col-start-1 row-start-1">
