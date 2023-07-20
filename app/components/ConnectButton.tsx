@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 
 import { useWeb3React } from "@web3-react/core";
@@ -8,12 +8,19 @@ import { useWeb3React } from "@web3-react/core";
 import { metaMask } from "../connectors/metaMask";
 import { walletConnect } from "../connectors/walletConnect";
 
-import { CHAIN_ID } from "../contexts/CollectionContext";
+import { CHAIN_INFO } from "../contexts/CollectionContext";
+
+import AnswerLabel from "./AnswerLabel";
 
 export default function ConnectButton() {
   const { isActive } = useWeb3React();
 
   const modalRef = useRef<HTMLDialogElement>(null);
+  const answerModalRef = useRef<HTMLDialogElement>(null);
+  const [answerData, setAnswerData] = useState<{
+    success?: boolean;
+    answer: ReactNode;
+  }>();
 
   return (
     <>
@@ -35,7 +42,19 @@ export default function ConnectButton() {
               <h2>Connect your favourite wallet</h2>
               <div className="grid gap-2 md:grid-cols-2">
                 <button
-                  onClick={() => metaMask.activate(CHAIN_ID)}
+                  onClick={() => {
+                    try {
+                      metaMask.activate(CHAIN_INFO);
+                    } catch (error) {
+                      console.log(error);
+                      if (error instanceof Error)
+                        setAnswerData({
+                          success: false,
+                          answer: error.message,
+                        });
+                      answerModalRef.current?.showModal();
+                    }
+                  }}
                   className="btn-large btn-primary btn"
                 >
                   <Image
@@ -48,7 +67,19 @@ export default function ConnectButton() {
                   Metamask
                 </button>
                 <button
-                  onClick={() => walletConnect.activate(CHAIN_ID)}
+                  onClick={() => {
+                    try {
+                      walletConnect.activate(CHAIN_INFO.chainId);
+                    } catch (error) {
+                      console.log(error);
+                      if (error instanceof Error)
+                        setAnswerData({
+                          success: false,
+                          answer: error.message,
+                        });
+                      answerModalRef.current?.showModal();
+                    }
+                  }}
                   className="btn-large btn-primary btn"
                 >
                   <Image
@@ -61,8 +92,19 @@ export default function ConnectButton() {
                   Wallet Connect
                 </button>
               </div>
-              <h3>Chain ID: {CHAIN_ID}</h3>
-              <p className="text-gray-400">Cronos Main Net</p>
+              <h3>Chain ID: {CHAIN_INFO.chainId}</h3>
+              <p className="text-gray-400">{CHAIN_INFO.chainName}</p>
+            </form>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
+          <dialog id="answerModalRef" ref={answerModalRef} className="modal">
+            <form method="dialog" className="modal-box">
+              <AnswerLabel
+                success={answerData?.success}
+                answer={answerData?.answer}
+              />
             </form>
             <form method="dialog" className="modal-backdrop">
               <button>close</button>

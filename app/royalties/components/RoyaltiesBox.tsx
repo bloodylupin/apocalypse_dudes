@@ -8,8 +8,6 @@ export default function RoyaltiesBox() {
   const { isActive } = useWeb3React();
   return (
     <>
-      <h1>Royalties</h1>
-
       {isActive ? (
         <>
           <RoyaltiesInfo />

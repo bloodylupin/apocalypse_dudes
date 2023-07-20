@@ -14,8 +14,6 @@ export default function MintBox() {
 
   return (
     <>
-      <h1>Mint</h1>
-
       {isActive ? (
         <>
           <MintInfo amount={amount} setAmount={setAmount} />

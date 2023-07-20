@@ -1,3 +1,5 @@
+"use client";
+
 import { Web3ReactHooks, Web3ReactProvider } from "@web3-react/core";
 import type { MetaMask } from "@web3-react/metamask";
 import type { WalletConnect } from "@web3-react/walletconnect";

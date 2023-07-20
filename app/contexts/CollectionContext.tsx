@@ -10,7 +10,16 @@ import {
   type SetStateAction,
 } from "react";
 
-export const CHAIN_ID = 338;
+export const CHAIN_INFO = {
+  chainId: 338,
+  chainName: "Cronos Test Net",
+  nativeCurrency: {
+    name: "cronos",
+    symbol: "tCRO",
+    decimals: 18 as const,
+  },
+  rpcUrls: ["https://evm-t3.cronos.org"],
+};
 
 import { useWeb3React } from "@web3-react/core";
 import { BigNumberish, Contract, ContractRunner, ethers } from "ethers";

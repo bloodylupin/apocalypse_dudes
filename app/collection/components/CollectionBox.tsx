@@ -9,7 +9,6 @@ export default function CollectionBox() {
 
   return (
     <>
-      <h1>Collection</h1>
       {isActive ? (
         <>
           <CollectionInfo />

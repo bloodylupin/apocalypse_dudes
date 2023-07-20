@@ -10,6 +10,14 @@ const b = Bungee({ weight: "400", subsets: ["latin"] });
 //   description: 'Cronos NFT AI Collection by Jack Yolo',
 // }
 
+import Web3Provider from "./contexts/Web3Context";
+import CollectionProvider from "./contexts/CollectionContext";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import BottomNavbar from "./components/BottomNavbar";
+import PageWrapper from "./components/PageWrapper";
+
 export default function RootLayout({
   children,
 }: {
@@ -17,7 +25,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="forest" className={`${b.className}`}>
-      {children}
+      <Web3Provider>
+        <CollectionProvider>
+          <body className="">
+            <div
+              className={`grid h-full grid-rows-[auto,1fr,auto] overflow-hidden bg-neutral`}
+              style={{ perspective: 1000 }}
+            >
+              <Header />
+              <PageWrapper>{children}</PageWrapper>
+              <Footer />
+            </div>
+            <div className="h-16"></div>
+            <BottomNavbar />
+          </body>
+        </CollectionProvider>
+      </Web3Provider>
     </html>
   );
 }

@@ -3,7 +3,7 @@ import ConnectAvatar from "./ConnectAvatar";
 
 export default function Header() {
   return (
-    <header className="navbar bg-neutral text-neutral-content">
+    <header className="navbar relative z-30 bg-neutral text-neutral-content">
       <div className="flex-1">
         <Link href="/" className="btn-ghost btn text-xl normal-case">
           <span className="hidden md:block">Apocalypse Dudes</span>

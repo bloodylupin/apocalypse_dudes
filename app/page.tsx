@@ -1,14 +1,22 @@
 "use client";
 
-import HomeBox from "./components/HomeBox";
-import PageWrapper from "./components/PageWrapper";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+
+import Link from "next/link";
 
 export default function Home() {
+  const location = usePathname();
   return (
-    <PageWrapper>
-      <div className="prose mx-auto grid h-full max-w-md place-content-center px-4 py-16 text-center">
-        <HomeBox />
-      </div>
-    </PageWrapper>
+    <>
+      <h2>Cronos NFT Collection</h2>
+      <p className="mx-auto max-w-md">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo porro
+        possimus at fugit accusantium voluptatem ad neque culpa?
+      </p>
+      <Link href="/mint" className="btn-primary btn-wide btn mx-auto">
+        Mint
+      </Link>
+    </>
   );
 }

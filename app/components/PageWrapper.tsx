@@ -1,40 +1,43 @@
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import { type ReactNode } from "react";
+"use client";
 
-import LayoutClient from "./LayoutClient";
+import Image from "next/image";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PageWrapper({ children }: { children: ReactNode }) {
   const location = usePathname();
   return (
-    <LayoutClient>
-      <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0, filter: "blur(50px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          className="hero fixed inset-0 -z-10"
-        >
-          <div className="hero-overlay bg-opacity-50 opacity-[.99]"></div>
+    <AnimatePresence>
+      <motion.div
+        key={location}
+        initial={{ filter: "blur(50px)" }}
+        animate={{ filter: "blur(0px)" }}
+        exit={{ filter: "blur(50px)" }}
+        className="col-start-1 row-start-2 grid"
+      >
+        <div className="hero relative -z-10 col-start-1 row-start-1">
+          <div className="hero-overlay relative z-30 bg-opacity-50"></div>
           <Image
             src={`/${location.replace("/", "img-")}.jpg`}
             alt=""
-            width={853}
-            height={1280}
+            fill
             priority={true}
-            className="w-full object-cover object-center"
+            className="max-h-full object-cover object-center"
           />
-        </motion.div>
-        <motion.main
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ scale: 10 }}
-          key={location}
-          //   className="col-start-1 row-start-2"
-        >
-          {children}
-        </motion.main>
-      </AnimatePresence>
-    </LayoutClient>
+        </div>
+        <main className="col-start-1 row-start-1">
+          <div className="prose mx-auto grid h-full place-content-center px-4 py-16 text-center">
+            <h1>
+              {location.replace("/", "")
+                ? location.replace("/", "")
+                : "Apocalypse Dudes"}
+            </h1>
+            {children}
+          </div>
+        </main>
+      </motion.div>
+    </AnimatePresence>
   );
 }
